@@ -1,6 +1,4 @@
-//BTCUSDT
-//36291
-//35764
+//BTC-USDT
 
 //Chat ID 958168746
 
@@ -39,8 +37,6 @@ async function process() {
 
     const closes = response.data.map(candle => parseFloat(candle[4]));
     const rsi = calcRSI(closes);
-    console.log("RSI: " + rsi);
-    console.log("Preço: " + price);
 
     if (rsi >= 70 && lastmessage !== "Sobrecomprado!") {
         lastmessage = "Sobrecomprado!"
@@ -53,8 +49,6 @@ async function process() {
         console.log("Preço: " + price + "\nRSI: " + rsi + " - " + lastmessage);
         botMessage(price, rsi, lastmessage)
     }
-    else
-        console.log("Aguardar!")
 }
 
 setInterval(process, 1000)
