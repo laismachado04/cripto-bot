@@ -30,7 +30,7 @@ function botMessage(price, rsi, lastmessage) {
     bot.telegram.sendMessage(CHAT_ID, '💹' + PAR + '\n\nPreço: '  + price + " \nRSI: " + rsi + "\n" + lastmessage);
 }
 
-async function process() {    
+async function process() {
     const axios = require("axios");
 
     const response = await axios.get("https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1m");
@@ -41,14 +41,14 @@ async function process() {
     const rsi = calcRSI(closes);
     console.log("RSI: " + rsi);
     console.log("Preço: " + price);
-    
+
     if (rsi >= 70 && lastmessage !== "Sobrecomprado!") {
         lastmessage = "Sobrecomprado!"
         console.log("Preço: " + price + "\nRSI: " + rsi + " - " + lastmessage);
         botMessage(price, rsi, lastmessage)
-        
+
     }
-    else if (rsi <= 30 && lastmessage !== "Sobrevendido!") { 
+    else if (rsi <= 30 && lastmessage !== "Sobrevendido!") {
         lastmessage = "Sobrevendido!"
         console.log("Preço: " + price + "\nRSI: " + rsi + " - " + lastmessage);
         botMessage(price, rsi, lastmessage)
